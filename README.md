@@ -8,7 +8,7 @@ The API is written in typescript on nodejs using expressjs. The data persists in
 
 ## Architecture
 
-The architecture of this API microserviece is guided in design following the alignments of Clean Architecture
+The architecture of this API microserviece is guided in design by the alignments of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 ### Overview
 
@@ -72,8 +72,8 @@ To set up and run the microservice, follow the steps below:
 #### Clone the repository
 
 ```sh
-git clone https://github.com/yourusername/your-repo.git
-cd your-repo
+git clone https://github.com/francisco-gargiulo/typescript-nodejs-clean-architecture
+cd typescript-nodejs-clean-architecture
 ```
 
 #### Install dependencies
@@ -90,7 +90,7 @@ To start the development server, run:
 npm run dev
 ```
 
-The application will be available at http://localhost:3000.
+The application will be available at http://localhost:3000
 
 #### Running Tests
 
