@@ -1,55 +1,55 @@
-// src/adapters/express/routes/userRoutes.ts
-
 import { Router } from "express";
 
-import CreateUser from "../../../useCases/CreateUser";
-import GetUser from "../../../useCases/GetUser";
-import UpdateUser from "../../../useCases/UpdateUser";
-import DeleteUser from "../../../useCases/DeleteUser";
+import MemoryUserRepository from "../../memory/MemoryUserRepository";
 
-import { MemoryUserRepository } from "../../memory/MemoryUserRepository";
+import createUser from "../../../useCases/createUser";
+import getUser from "../../../useCases/getUser";
+import deleteUser from "../../../useCases/deleteUser";
+import updateUser from "../../../useCases/updateUser";
 
 const userRepository = new MemoryUserRepository();
-const createUser = new CreateUser(userRepository);
-const getUser = new GetUser(userRepository);
-const updateUser = new UpdateUser(userRepository);
-const deleteUser = new DeleteUser(userRepository);
+
+const createUserUseCase = createUser(userRepository);
+const getUserUseCase = getUser(userRepository);
+const deleteUserUseCase = deleteUser(userRepository);
+const updateUserUseCase = updateUser(userRepository);
 
 const router = Router();
 
 router.post("/", async (req, res) => {
   const { name, email, password } = req.body;
-  const user = await createUser.execute(name, email, password);
+  const user = await createUserUseCase(name, email, password);
   res.status(201).json(user);
 });
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const user = await getUser.execute(id);
-
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
+router.get("/:id", async ({ params: { id } }, res) => {
+  try {
+    const user = await getUserUseCase(id);
+    res.json(user);
+  } catch (error) {
+    res.status(404).json({ message: "User not found" });
   }
-
-  res.json(user);
 });
 
-router.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { name, email, password } = req.body;
-  const updatedUser = await updateUser.execute(id, name, email, password);
-
-  if (!updatedUser) {
-    return res.status(404).json({ message: "User not found" });
+router.put(
+  "/:id",
+  async ({ params: { id }, body: { name, email, password } }, res) => {
+    try {
+      const updatedUser = await updateUserUseCase(id, name, email, password);
+      res.json(updatedUser);
+    } catch (error) {
+      res.status(404).json({ message: "User not found" });
+    }
   }
+);
 
-  res.json(updatedUser);
-});
-
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  await deleteUser.execute(id);
-  res.status(204).json();
+router.delete("/:id", async ({ params: { id } }, res) => {
+  try {
+    await deleteUserUseCase(id);
+    res.status(204).json();
+  } catch (error) {
+    res.status(404).json({ message: "User not found" });
+  }
 });
 
 export default router;

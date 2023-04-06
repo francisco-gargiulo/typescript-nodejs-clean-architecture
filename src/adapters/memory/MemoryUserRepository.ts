@@ -3,7 +3,7 @@
 import { UserRepository } from "../../domain/repositories/UserRepository";
 import { User } from "../../domain/entities/User";
 
-export class MemoryUserRepository implements UserRepository {
+export default class MemoryUserRepository implements UserRepository {
   users: User[] = [];
 
   async findById(id: string): Promise<User | null> {

@@ -42,7 +42,10 @@ Tipically, a clean architecture based will have a folder structure as next:
 │   └── services/
 │       └── UserService.ts
 ├── usecases/
-│   └── userUseCases.ts
+│   │   CreateUser.ts
+│   │   GetUser.ts
+│   │   UpdateUser.ts
+│   └── DeleteUser.ts
 └── main.ts
 ```
 
@@ -55,7 +58,7 @@ Here's a brief explanation of each folder and file:
   - `entities/`: This folder contains the entity definitions for the microservice. In this case, there is one entity: User.ts.
   - `repositories/`: This folder contains the repository interfaces for the microservice. In this case, there is one repository interface: UserRepository.ts.
   - `services/`: This folder contains the service interfaces for the microservice. In this case, there is one service interface: UserService.ts.
-- `useCases/`: This folder contains the use cases for the microservice. In this case, there is one use case file: userUseCases.ts. This file defines the use cases for the User entity, such as creating a new user or retrieving an existing user.
+- `useCases/`: This folder contains the use cases for the microservice.
 - `main.ts`: This is the entry point to the microservice, which sets up the adapters, use cases, and domain logic, and starts the server.
 
 ## Running the Microservice
