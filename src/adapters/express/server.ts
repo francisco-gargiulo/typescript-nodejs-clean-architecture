@@ -1,5 +1,3 @@
-// src/adapters/express/server.ts
-
 import app from "./startup";
 
 const PORT = process.env.PORT || 3000;

@@ -28,12 +28,11 @@ Tipically, a clean architecture based will have a folder structure as next:
 ```txt
 ├── adapters/
 │   ├── express/
-│   │   ├── routes/
-│   │   │   └── userRoutes.ts
+│   │   ├── routes.ts
 │   │   ├── server.ts
 │   │   └── startup.ts
 │   └── memory/
-│       └── userRepository.ts
+│       └── MemoryUserRepository.ts
 ├── domain/
 │   ├── entities/
 │   │   └── User.ts
@@ -42,10 +41,10 @@ Tipically, a clean architecture based will have a folder structure as next:
 │   └── services/
 │       └── UserService.ts
 ├── usecases/
-│   │   CreateUser.ts
-│   │   GetUser.ts
-│   │   UpdateUser.ts
-│   └── DeleteUser.ts
+│   │   createUser.ts
+│   │   getUser.ts
+│   │   updateUser.ts
+│   └── deleteUser.ts
 └── main.ts
 ```
 
@@ -108,7 +107,7 @@ npm test
 This are the mainly use cases 
 
 - Create User
-- Get User
+- Read User
 - Update User
 - Delete User
 

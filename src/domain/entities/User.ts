@@ -1,6 +1,4 @@
-// src/domain/entities/User.ts
-
-export class User {
+export default class User {
   id: string;
   name: string;
   email: string;
